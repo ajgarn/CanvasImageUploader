@@ -4,8 +4,11 @@
  *
  * This class requires the Javascript file from https://github.com/jseidelin/exif-js
  *
+ * See the GitHub repo for examples: https://github.com/ajgarn/CanvasImageUploader.
+ *
  * @class CanvasImageUploader
  * @author ajgarn
+ * @see https://github.com/ajgarn/CanvasImageUploader
  */
 var CanvasImageUploader = function (options) {
     options = options || {};

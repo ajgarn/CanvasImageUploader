@@ -36,6 +36,7 @@ Javascript:
             beforeSend: function (request) {
                 request.setRequestHeader("Content-Type", ".jpg");
             },
+            processData: false,
             success: function (result) {
             },
             error: function (error) {
