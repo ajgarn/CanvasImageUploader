@@ -1,6 +1,6 @@
 {
   "name": "canvas-image-uploader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Resize and rotate images by EXIF orientation on the client side during upload. This uses the HTML Canvas element and HTML5 FileReader.",
   "main": "canvas-image-uploader.js",
   "scripts": {
