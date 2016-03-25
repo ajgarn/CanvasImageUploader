@@ -2,7 +2,12 @@
 Resize and rotate images by EXIF orientation on the client side during upload. This uses the HTML Canvas element and HTML5 FileReader.
 
 ## Use
-Make sure to include [https://github.com/jseidelin/exif-js](https://github.com/jseidelin/exif-js) in your HTML, before CanvasImageUploader.
+Require from npm: `npm install canvas-image-uploader --save`
+
+Or, if you just want to include the Javascript file in your HTML, make sure to also include [https://github.com/jseidelin/exif-js](https://github.com/jseidelin/exif-js), before CanvasImageUploader.
+    
+    <script src="exif-js/exif.js"></script>
+    <script src="canvas-image-uploader.js"></script>
 
 ### Basic file upload
 Upload image to canvas via file input.
@@ -41,7 +46,7 @@ Javascript:
             },
             error: function (error) {
             }
-        }));
+        });
     }
 
 ### Show a preview of the image

@@ -10,7 +10,9 @@
  * @author ajgarn
  * @see https://github.com/ajgarn/CanvasImageUploader
  */
-var CanvasImageUploader = function (options) {
+var EXIF = EXIF || require('exif-js');
+
+function CanvasImageUploader(options) {
     options = options || {};
     if (typeof options.maxSize === 'undefined') options.maxSize = 1500;
     if (typeof options.jpegQuality === 'undefined') options.jpegQuality = 0.7;
@@ -226,4 +228,8 @@ var CanvasImageUploader = function (options) {
             imageData = base64toBlob(base64, 'image/jpeg');       // Byte array
         }
     }
-};
+}
+
+if (typeof module !== 'undefined') {
+    module.exports = CanvasImageUploader;
+}
