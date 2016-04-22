@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example form upload</title>
+    <script src="//code.jquery.com/jquery-1.12.2.min.js"></script>
+</head>
+<body>
+<form>
+    <p>
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Upload">
+    </p>
+    <canvas width="200" height="200" id="preview-canvas"></canvas>
+</form>
+
+<script src="node_modules/exif-js/exif.js"></script>
+<script src="canvas-image-uploader.js"></script>
+<script>
+    var uploader = new CanvasImageUploader({
+        maxSize: 1500,
+        jpegQuality: 0.7
+    });
+
+    var MAX_PREVIEW_SIZE = 200;
+    var file;   // File to upload
+    var $previewCanvas = $('#preview-canvas');
+
+    function onImageChanged(e) {
+        var files = e.target.files || e.dataTransfer.files;
+        if (files) {
+            file = files[0];
+            var $canvas = $('<canvas>');
+            uploader.readImageToCanvas(file, $canvas, function () {
+                uploader.copyToCanvas($canvas[0], $previewCanvas, MAX_PREVIEW_SIZE);      // Copy to preview
+                uploader.saveCanvasToImageData($canvas[0]);     // Save for later use in uploader.getImageData()
+            });
+        }
+    }
+
+    function getFileExtension(filename) {
+        return filename.split('.').pop();
+    }
+
+    // Upload the file data
+    function onSubmit(e) {
+        e.preventDefault();
+
+        if (file) {
+            $.ajax({
+                type: 'POST',
+                url: 'http://...',
+                data: uploader.getImageData(),      // Get saved image data, from uploader.saveCanvasToImageData()
+                beforeSend: function (request) {
+                    request.setRequestHeader("Content-Type", getFileExtension(file.name));
+                },
+                processData: false,
+                success: function (result) {
+                },
+                error: function (error) {
+                }
+            });
+        } else {
+            console.warn("No file selected...");
+        }
+    }
+
+    $('#file').bind('change', onImageChanged);
+    $('form').on('submit', onSubmit);
+</script>
+</body>
+</html>
